@@ -12,21 +12,23 @@ class App extends React.Component {
         this.state = {
             users: [],
         }
-        this.componentDidMount(
-            data()
-                .then(users => this.state = {
-                    users: users
-                })
-        )
     }
+    
+    componentDidMount() {
+        data()
+            .then(users => this.setState({
+                users: users
+            }))
 
+    }
+    
 
     render() {
 
         return (
             <React.Fragment>
                 <Header />
-                <Main allUsers={listOfAllUsers[0].results} />
+                <Main allUsers={this.state.users} />
                 <Footer />
             </React.Fragment >
         )
