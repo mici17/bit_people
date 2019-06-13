@@ -70,12 +70,19 @@
 .list-name{
   font-weight: 600;
 }
-.single-user p{
-  padding-left: 15px;
+.single-card-user p{
+  padding-left: 25px;
 }
-
+.mail{
+  padding-top: 30px;
+  padding-bottom: 5px;
+}
 .name{
-  padding-top: 10px;
+  margin-top: -60px;
+  position: absolute;
+  color: white;
+  font-size: 30px;
+  font-weight: 100;
 }
 
 .dob{
