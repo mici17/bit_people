@@ -11,9 +11,10 @@ class App extends React.Component {
         super(props);
         this.state = {
             users: [],
+            layout: true
         }
     }
-    
+
     componentDidMount() {
         data()
             .then(users => this.setState({
@@ -21,13 +22,17 @@ class App extends React.Component {
             }))
 
     }
-    
+
 
     render() {
 
         return (
             <React.Fragment>
                 <Header />
+                {/* <div className="dugmici">
+                    <button className="elButton cards">Cards</button>
+                    <button className="elButton list">List</button>
+                </div> */}
                 <Main allUsers={this.state.users} />
                 <Footer />
             </React.Fragment >
