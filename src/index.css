@@ -48,7 +48,7 @@
   margin: 0 auto;
 }
 
-.single-user{
+.single-card-user{
   border: 1px solid lightgray;
   width: 32%;
   margin: 2px 15px 30px 0px;
@@ -57,7 +57,19 @@
   border-radius: 25px 25px 0 0;
 
 }
-
+.single-list-user{
+  border: 1px solid lightgray;
+  width: 100%;
+  padding: 10px 0 0 10px;
+}
+.round-img{
+  float:left;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.list-name{
+  font-weight: 600;
+}
 .single-user p{
   padding-left: 15px;
 }

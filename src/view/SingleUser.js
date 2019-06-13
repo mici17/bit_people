@@ -3,11 +3,17 @@ import React from 'react';
 const SingleUser = (props) => {
     const user = props.user;
     return (
-        <section className="single-user">
-            <div className="thumbnail"><img className="img" src={user.photo} alt="slicica" /></div>
-            <p className="name">Name: {user.name}</p>
-            <p>Email: {user.hideEmail()}</p>
-            <p className="dob">Date of birth: {(new Date(user.dob).getMonth() + 1) + "-" + new Date(user.dob).getDate() + "-" + new Date(user.dob).getFullYear()}</p>
+        // <section className="single-card-user">
+        //     <div className="thumbnail"><img className="img" src={user.photo.large} alt="slicica" /></div>
+        //     <p className="name">{user.name.first}</p>
+        //     <p>{user.hideEmail()}</p>
+        //     <p className="dob">Birth date: {user.formatDate()}</p>
+        // </section>
+        <section className="single-list-user">
+            <div className="thumb-img"><img className="round-img" src={user.photo.thumbnail} alt="slicica" /></div>
+            <p className="list-name">{user.name.first} {user.name.last}</p>
+            <p><i className="fas fa-envelope"></i>email:{user.hideEmail()}</p>
+            <p className="dob"><i className="fas fa-birthday-cake"></i> {user.formatDate()}</p>
         </section>
     )
 };
