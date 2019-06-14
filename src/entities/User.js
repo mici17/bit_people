@@ -5,7 +5,12 @@ class User {
         this.email = userObj.email;
         this.dob = new Date(userObj.dob.date);
         this.photo = userObj.picture;
+        this.gender = userObj.gender;
 
+    }
+
+    isFemale() {
+        return this.gender === 'female'
     }
 
     hideEmail() {

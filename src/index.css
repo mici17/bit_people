@@ -117,3 +117,7 @@ button:hover{
   background-color: #D5646A;
   cursor: pointer;
 }
+
+.red {
+  background-color: #ffebee;
+}

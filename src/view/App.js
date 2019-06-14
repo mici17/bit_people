@@ -17,7 +17,8 @@ class App extends React.Component {
 
         this.state = {
             users: [],
-            layout
+            layout,
+            female: true
         }
 
     }
@@ -44,6 +45,8 @@ class App extends React.Component {
     refreshPage = () => {
         this.loadData()
     }
+
+
 
     render() {
         return (
