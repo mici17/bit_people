@@ -8,10 +8,18 @@ import { data } from '../service/UserService'
 class App extends React.Component {
     constructor(props) {
         super(props);
+
+        // const savedLayout = localStorage.getItem(`layout`)
+        // const layout = savedLayout || 'list' ---> drugi nacin zapisivanja
+
+        const savedLayout = localStorage.getItem(`layout`);
+        const layout = savedLayout ? savedLayout : 'list'
+
         this.state = {
             users: [],
-            layout: "list"
+            layout
         }
+
     }
 
     loadData() {
@@ -26,23 +34,22 @@ class App extends React.Component {
 
     }
 
-    onGridButtonClick = () => {
-        this.setState({ layout: "grid" })
+    onLayoutChangeClick = () => {
+
+        const layout = this.state.layout === 'list' ? 'grid' : 'list'
+        this.setState({ layout })
+        localStorage.setItem('layout', layout)
     }
 
-    onListButtonClick = () => {
-        this.setState({ layout: "list" })
-    }
     refreshPage = () => {
         this.loadData()
-
-
     }
-    render() {
 
+    render() {
         return (
-            <React.Fragment>
-                <Header layout={this.state.layout} onGridButtonClick={this.onGridButtonClick} onListButtonClick={this.onListButtonClick} refreshPage={this.refreshPage} />
+
+            < React.Fragment >
+                <Header layout={this.state.layout} onLayoutChangeClick={this.onLayoutChangeClick} refreshPage={this.refreshPage} />
                 <Main allUsers={this.state.users} layout={this.state.layout} />
                 <Footer />
             </React.Fragment >
