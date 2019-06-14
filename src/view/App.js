@@ -3,6 +3,7 @@ import { Header } from './Header';
 import { Footer } from './Footer'
 import { Main } from './Main';
 import { data } from '../service/UserService'
+import { SearchBar } from './SearchUsers'
 
 
 class App extends React.Component {
@@ -18,7 +19,8 @@ class App extends React.Component {
         this.state = {
             users: [],
             layout,
-            female: true
+            female: true,
+            value: ''
         }
 
     }
@@ -46,13 +48,24 @@ class App extends React.Component {
         this.loadData()
     }
 
+    onKeyPress = (event) => {
+        const input = event.target.value;
+        this.setState({ value: input })
+        const search = this.state.value
+        this.state.users.filter((user) => {
+            if (search.includes(`${user.name.first}`) || search.includes(`${user.name.last}`)) {
 
+            }
+
+        })
+    }
 
     render() {
         return (
 
             < React.Fragment >
                 <Header layout={this.state.layout} onLayoutChangeClick={this.onLayoutChangeClick} refreshPage={this.refreshPage} />
+                <SearchBar value={this.onKeyPress} />
                 <Main allUsers={this.state.users} layout={this.state.layout} />
                 <Footer />
             </React.Fragment >
