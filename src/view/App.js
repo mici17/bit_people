@@ -14,24 +14,35 @@ class App extends React.Component {
         }
     }
 
-    componentDidMount() {
+    loadData() {
         data()
             .then(users => this.setState({
                 users: users
             }))
+    }
+
+    componentDidMount() {
+        this.loadData()
 
     }
 
+    onGridButtonClick = () => {
+        this.setState({ layout: "grid" })
+    }
 
+    onListButtonClick = () => {
+        this.setState({ layout: "list" })
+    }
+    refreshPage = () => {
+        this.loadData()
+
+
+    }
     render() {
 
         return (
             <React.Fragment>
-                <Header layout={this.state.layout} />
-                {/* <div className="dugmici">
-                    <button className="elButton cards">Cards</button>
-                    <button className="elButton list">List</button>
-                </div> */}
+                <Header layout={this.state.layout} onGridButtonClick={this.onGridButtonClick} onListButtonClick={this.onListButtonClick} refreshPage={this.refreshPage} />
                 <Main allUsers={this.state.users} layout={this.state.layout} />
                 <Footer />
             </React.Fragment >
