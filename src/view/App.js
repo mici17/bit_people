@@ -19,8 +19,7 @@ class App extends React.Component {
         this.state = {
             users: [],
             layout,
-            female: true,
-            value: ''
+            inputValue: ''
         }
 
     }
@@ -48,25 +47,37 @@ class App extends React.Component {
         this.loadData()
     }
 
-    onKeyPress = (event) => {
-        const input = event.target.value;
-        this.setState({ value: input })
-        const search = this.state.value
-        this.state.users.filter((user) => {
-            if (search.includes(`${user.name.first}`) || search.includes(`${user.name.last}`)) {
 
-            }
+    onInputChange = (e) => {
+        this.setState({inputValue:e.target.value})
 
-        })
     }
 
-    render() {
-        return (
+    // onKeyPress = (event) => {
+    //     const input = event.target.value;
+    //     this.setState({ value: input })
+    //     const search = this.state.value
+    //     this.state.users.filter((user) => {
+    //         if (search.includes(`${user.name.first}`) || search.includes(`${user.name.last}`)) {
 
+    //         }
+
+    //     })
+    // }
+
+    render() {
+
+        const { users, inputValue } = this.state;
+
+        const usersFiltered = users.filter(user => (
+          user.name.first.toLowerCase().includes(inputValue.toLowerCase())
+        ));
+
+        return (
             < React.Fragment >
                 <Header layout={this.state.layout} onLayoutChangeClick={this.onLayoutChangeClick} refreshPage={this.refreshPage} />
-                <SearchBar value={this.onKeyPress} />
-                <Main allUsers={this.state.users} layout={this.state.layout} />
+                <SearchBar onInputChange={this.onInputChange} value={this.state.inputValue} />
+                <Main allUsers={usersFiltered} layout={this.state.layout} />
                 <Footer />
             </React.Fragment >
         )
