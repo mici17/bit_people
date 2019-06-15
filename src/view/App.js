@@ -4,6 +4,7 @@ import { Footer } from './Footer'
 import { Main } from './Main';
 import { data } from '../service/UserService'
 import { SearchBar } from './SearchUsers'
+import {LoadingAnimation} from './LoadingAnimation'
 
 
 class App extends React.Component {
@@ -19,7 +20,8 @@ class App extends React.Component {
         this.state = {
             users: [],
             layout,
-            inputValue: ''
+            inputValue: '',
+            isLoading:true
         }
 
     }
@@ -28,11 +30,12 @@ class App extends React.Component {
         data()
             .then(users => this.setState({
                 users: users
-            }))
+            }));
     }
 
     componentDidMount() {
-        this.loadData()
+        this.setState({isLoading:false});
+        this.loadData();
 
     }
 
@@ -44,12 +47,12 @@ class App extends React.Component {
     }
 
     refreshPage = () => {
-        this.loadData()
+        this.loadData();
     }
 
 
     onInputChange = (e) => {
-        this.setState({inputValue:e.target.value})
+        this.setState({inputValue:e.target.value});
 
     }
 
@@ -66,21 +69,34 @@ class App extends React.Component {
     // }
 
     render() {
-
+ 
         const { users, inputValue } = this.state;
 
         const usersFiltered = users.filter(user => (
           user.name.first.toLowerCase().includes(inputValue.toLowerCase())
         ));
 
-        return (
-            < React.Fragment >
-                <Header layout={this.state.layout} onLayoutChangeClick={this.onLayoutChangeClick} refreshPage={this.refreshPage} />
-                <SearchBar onInputChange={this.onInputChange} value={this.state.inputValue} />
-                <Main allUsers={usersFiltered} layout={this.state.layout} />
-                <Footer />
-            </React.Fragment >
-        )
+        if (this.state.users.length===0) {
+           return (                
+        <React.Fragment>
+            <Header layout={this.state.layout} onLayoutChangeClick={this.onLayoutChangeClick} refreshPage={this.refreshPage} />
+            <LoadingAnimation/>
+            <Footer />
+        </React.Fragment>
+    ) 
+
+        } else {
+
+            return (
+                <React.Fragment>
+                    <Header layout={this.state.layout} onLayoutChangeClick={this.onLayoutChangeClick} refreshPage={this.refreshPage} />
+                    <SearchBar onInputChange={this.onInputChange} value={this.state.inputValue} />
+                    <Main allUsers={usersFiltered} layout={this.state.layout} />
+                    <Footer />
+                </React.Fragment>
+            )
+        }
+
     }
 };
 
