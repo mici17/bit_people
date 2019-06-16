@@ -47,6 +47,7 @@ class App extends React.Component {
     }
 
     refreshPage = () => {
+        this.setState({users:[]});
         this.loadData();
     }
 
