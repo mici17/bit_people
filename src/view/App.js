@@ -66,14 +66,18 @@ class App extends React.Component {
 
         const { users, inputValue } = this.state;
 
-        const usersFiltered = users.filter(user => (
+        const usersFilteredFirstName = users.filter(user => (
             user.name.first.toLowerCase().includes(inputValue.toLowerCase())
+        ));
+        const usersFilteredLastName = users.filter(user => (
+            user.name.last.toLowerCase().includes(inputValue.toLowerCase())
         ));
 
         const hasUsers = this.state.users.length > 0
+        const allUsers = usersFilteredFirstName.concat(usersFilteredLastName);
 
         const mainJSX = <Main
-            allUsers={usersFiltered}
+            allUsers={allUsers}
             layout={this.state.layout}
             onInputChange={this.onInputChange}
             value={this.state.inputValue} />
