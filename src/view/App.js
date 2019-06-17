@@ -10,7 +10,7 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <Switch >
-                    <Route exact path="/about" component={About} />
+                    <Route path="/about" component={About} />
                     <Route path='/' component={Homepage} />
                 </Switch>
                 < Footer />

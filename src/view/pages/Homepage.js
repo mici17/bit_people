@@ -9,13 +9,17 @@ class Homepage extends React.Component {
         super(props);
 
         const savedLayout = localStorage.getItem(`layout`);
-        const layout = savedLayout ? savedLayout : 'list'
+        const layout = savedLayout ? savedLayout : 'list';
+
+        const savedUsers = localStorage.getItem(`users`);
+        const users = savedUsers ? savedUsers : [];
 
         this.state = {
             users: [],
             layout,
             inputValue: '',
-            about: false
+            about: false,
+            time: new Date().getTime()
         }
     }
 
@@ -24,11 +28,20 @@ class Homepage extends React.Component {
             .then(users => this.setState({
                 users: users
             }));
+
     }
+
+    // loadedUsers() {
+    //     if (this.state.users > 0) {
+    //         return localStorage.setItem(users, users)
+    //     }
+    // }
+
 
     componentDidMount() {
         this.loadData();
-
+        const users = this.state.users;
+        localStorage.setItem('users', users)
     }
 
     onLayoutChangeClick = () => {
@@ -48,6 +61,17 @@ class Homepage extends React.Component {
         this.setState({ inputValue: e.target.value });
 
     }
+
+    timeUpdate = () => {
+        const newTime = new Date().getTime();
+        const updatedTime = newTime - this.state.time;
+        this.setState({ time: new Date.getTime() });
+
+        return updatedTime;
+
+    }
+
+
 
     render() {
         const { users, inputValue } = this.state;
