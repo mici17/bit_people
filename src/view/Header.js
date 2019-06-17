@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { App } from './App'
-import { About } from './about/About'
 
 const Header = (props) => {
 

@@ -86,7 +86,7 @@ class App extends React.Component {
                     refreshPage={this.refreshPage}
                     about={this.state.about} />
                 <Switch >
-                    <Route path="/about" component={About} onAboutChange={this.onAboutChange} />
+                    <Route path="/about" component={About} />
                     <Route path='/' render={(props) => {
                         return hasUsers ? mainJSX : <LoadingAnimation />
                     }} />
