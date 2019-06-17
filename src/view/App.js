@@ -4,6 +4,9 @@ import { Footer } from './Footer'
 import { Main } from './Main';
 import { data } from '../service/UserService'
 import { LoadingAnimation } from './LoadingAnimation'
+import { Route, Switch } from "react-router-dom";
+import { About } from './about/About';
+
 
 
 class App extends React.Component {
@@ -20,7 +23,7 @@ class App extends React.Component {
             users: [],
             layout,
             inputValue: '',
-            isLoading: true
+            about: false
         }
 
     }
@@ -33,7 +36,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ isLoading: false });
         this.loadData();
 
     }
@@ -56,6 +58,9 @@ class App extends React.Component {
 
     }
 
+    onAboutChange = () => {
+        this.setState({ about: true })
+    }
 
     render() {
 
@@ -78,8 +83,14 @@ class App extends React.Component {
             <React.Fragment>
                 <Header layout={this.state.layout}
                     onLayoutChangeClick={this.onLayoutChangeClick}
-                    refreshPage={this.refreshPage} />
-                {hasUsers ? mainJSX : <LoadingAnimation />}
+                    refreshPage={this.refreshPage}
+                    about={this.state.about} />
+                <Switch >
+                    <Route path="/about" component={About} onAboutChange={this.onAboutChange} />
+                    <Route path='/' render={(props) => {
+                        return hasUsers ? mainJSX : <LoadingAnimation />
+                    }} />
+                </Switch>
                 < Footer />
             </React.Fragment>
         )
