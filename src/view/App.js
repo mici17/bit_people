@@ -4,7 +4,7 @@ import { Footer } from './Footer'
 import { Main } from './Main';
 import { data } from '../service/UserService'
 import { SearchBar } from './SearchUsers'
-import {LoadingAnimation} from './LoadingAnimation'
+import { LoadingAnimation } from './LoadingAnimation'
 
 
 class App extends React.Component {
@@ -21,7 +21,7 @@ class App extends React.Component {
             users: [],
             layout,
             inputValue: '',
-            isLoading:true
+            isLoading: true
         }
 
     }
@@ -34,7 +34,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({isLoading:false});
+        this.setState({ isLoading: false });
         this.loadData();
 
     }
@@ -47,59 +47,47 @@ class App extends React.Component {
     }
 
     refreshPage = () => {
-        this.setState({users:[]});
+        this.setState({ users: [] });
         this.loadData();
     }
 
 
     onInputChange = (e) => {
-        this.setState({inputValue:e.target.value});
+        this.setState({ inputValue: e.target.value });
 
     }
 
-    // onKeyPress = (event) => {
-    //     const input = event.target.value;
-    //     this.setState({ value: input })
-    //     const search = this.state.value
-    //     this.state.users.filter((user) => {
-    //         if (search.includes(`${user.name.first}`) || search.includes(`${user.name.last}`)) {
-
-    //         }
-
-    //     })
-    // }
 
     render() {
- 
+
         const { users, inputValue } = this.state;
 
         const usersFiltered = users.filter(user => (
-          user.name.first.toLowerCase().includes(inputValue.toLowerCase())
+            user.name.first.toLowerCase().includes(inputValue.toLowerCase())
         ));
 
-        if (this.state.users.length===0) {
-           return (                
-        <React.Fragment>
-            <Header layout={this.state.layout} onLayoutChangeClick={this.onLayoutChangeClick} refreshPage={this.refreshPage} />
-            <LoadingAnimation/>
-            <Footer />
-        </React.Fragment>
-    ) 
+        const hasUsers = this.state.users.length > 0
 
-        } else {
+        const mainJSX = <Main
+            allUsers={usersFiltered}
+            layout={this.state.layout}
+            onInputChange={this.onInputChange}
+            value={this.state.inputValue} />
 
-            return (
-                <React.Fragment>
-                    <Header layout={this.state.layout} onLayoutChangeClick={this.onLayoutChangeClick} refreshPage={this.refreshPage} />
-                    <SearchBar onInputChange={this.onInputChange} value={this.state.inputValue} />
-                    <Main allUsers={usersFiltered} layout={this.state.layout} />
-                    <Footer />
-                </React.Fragment>
-            )
-        }
+
+        return (
+            <React.Fragment>
+                <Header layout={this.state.layout}
+                    onLayoutChangeClick={this.onLayoutChangeClick}
+                    refreshPage={this.refreshPage} />
+                {hasUsers ? mainJSX : <LoadingAnimation />}
+                < Footer />
+            </React.Fragment>
+        )
 
     }
 };
+
 
 
 export {
