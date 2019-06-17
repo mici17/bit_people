@@ -3,6 +3,7 @@ import { CardUser } from './CardUser'
 import { ListUser } from './ListUser'
 
 const UserList = (props) => {
+    console.log(props);
     if (props.users.length === 0) {
         return (
             <div className="whole-list group">
