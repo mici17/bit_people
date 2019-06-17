@@ -1,7 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 const Header = (props) => {
+
+    const pathname = props.location.pathname
 
     const icon = props.layout === 'list' ? 'fas fa-th' : 'fas fa-th-list'
     const aboutPage = <span className="nothing"></span>;
@@ -14,18 +16,22 @@ const Header = (props) => {
             <i className={icon}></i>
         </button>
     </span></>;
+
+
+    const isAboutPage = pathname === '/about'
+
     return (
         <header className="header">
             <h1 ><Link to="/" className="link-to">BIT People</Link></h1>
-            {props.about === false ? mainPage : aboutPage}
-
-
+            {isAboutPage ? aboutPage : mainPage}
         </header>
     )
 }
 
+const RouterHeader = withRouter(Header)
+
 export {
-    Header
+    RouterHeader as Header
 }
 
 

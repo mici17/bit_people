@@ -240,3 +240,16 @@ button:hover{
             transform: scale3D(0, 0, 1);
   } 
 }
+
+.no-users{
+  text-align: center;
+  margin: 300px auto;
+}
+.no-users h1{
+  font-size: 80px;
+  color: grey;
+}
+.no-users p{
+  font-size: 40px;
+  color: grey;
+}

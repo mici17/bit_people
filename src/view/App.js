@@ -90,9 +90,14 @@ class App extends React.Component {
                     refreshPage={this.refreshPage}
                     about={this.state.about} />
                 <Switch >
-                    <Route path="/about" component={About} />
+                    <Route exact path="/about" component={About} />
                     <Route path='/' render={(props) => {
-                        return hasUsers ? mainJSX : <LoadingAnimation />
+                        return hasUsers ? <Main
+                            {...props}
+                            allUsers={allUsers}
+                            layout={this.state.layout}
+                            onInputChange={this.onInputChange}
+                            value={this.state.inputValue} /> : <LoadingAnimation />
                     }} />
                 </Switch>
                 < Footer />
