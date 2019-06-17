@@ -24,6 +24,7 @@ const Header = (props) => {
         <header className="header">
             <h1 ><Link to="/" className="link-to">BIT People</Link></h1>
             {isAboutPage ? aboutPage : mainPage}
+
         </header>
     )
 }

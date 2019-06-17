@@ -5,7 +5,8 @@ import { Main } from './Main';
 import { data } from '../service/UserService'
 import { LoadingAnimation } from './LoadingAnimation'
 import { Route, Switch } from "react-router-dom";
-import { About } from './about/About';
+import { About } from './pages/About';
+import { Timestamp } from '/react-timestamp'
 
 
 
@@ -74,14 +75,7 @@ class App extends React.Component {
         ));
 
         const hasUsers = this.state.users.length > 0
-        const allUsers = usersFilteredFirstName.concat(usersFilteredLastName);
-
-        const mainJSX = <Main
-            allUsers={allUsers}
-            layout={this.state.layout}
-            onInputChange={this.onInputChange}
-            value={this.state.inputValue} />
-
+        const allUsers = [...usersFilteredFirstName, ...usersFilteredLastName];
 
         return (
             <React.Fragment>
