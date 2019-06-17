@@ -3,7 +3,6 @@ import { Header } from './Header';
 import { Footer } from './Footer'
 import { Main } from './Main';
 import { data } from '../service/UserService'
-import { SearchBar } from './SearchUsers'
 import { LoadingAnimation } from './LoadingAnimation'
 
 
